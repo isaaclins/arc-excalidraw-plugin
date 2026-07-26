@@ -1,0 +1,183 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Privacy Policy - Draw on Page with Excalidraw</title>
+    <meta
+      name="description"
+      content="Privacy policy for the Draw on Page with Excalidraw browser extension: no data collected, no transmission, no analytics."
+    />
+    <style>
+      :root {
+        color-scheme: light dark;
+        --bg: #ffffff;
+        --fg: #1b1b1f;
+        --muted: #5c5c66;
+        --accent: #6965db;
+        --rule: #e6e6ef;
+      }
+      @media (prefers-color-scheme: dark) {
+        :root {
+          --bg: #121317;
+          --fg: #e9e9ef;
+          --muted: #a0a0ad;
+          --accent: #8f8bef;
+          --rule: #2a2b33;
+        }
+      }
+      * {
+        box-sizing: border-box;
+      }
+      body {
+        margin: 0;
+        background: var(--bg);
+        color: var(--fg);
+        font: 16px/1.65 -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
+          Helvetica, Arial, sans-serif;
+      }
+      main {
+        max-width: 44rem;
+        margin: 0 auto;
+        padding: 4rem 1.25rem 6rem;
+      }
+      h1 {
+        font-size: 1.9rem;
+        line-height: 1.2;
+        margin: 0 0 0.35rem;
+      }
+      h2 {
+        font-size: 1.15rem;
+        margin: 2.5rem 0 0.6rem;
+        padding-top: 1.4rem;
+        border-top: 1px solid var(--rule);
+      }
+      p.updated {
+        color: var(--muted);
+        margin: 0 0 2rem;
+      }
+      ul {
+        padding-left: 1.2rem;
+      }
+      li {
+        margin: 0.35rem 0;
+      }
+      code {
+        background: color-mix(in srgb, var(--accent) 12%, transparent);
+        padding: 0.1rem 0.35rem;
+        border-radius: 4px;
+        font-size: 0.9em;
+      }
+      a {
+        color: var(--accent);
+      }
+      .lede {
+        font-size: 1.05rem;
+        border-left: 3px solid var(--accent);
+        padding-left: 1rem;
+        margin: 0 0 1rem;
+      }
+      footer {
+        margin-top: 3rem;
+        color: var(--muted);
+        font-size: 0.9rem;
+      }
+    </style>
+  </head>
+  <body>
+    <main>
+      <h1>Privacy Policy</h1>
+      <p class="updated">
+        Draw on Page with Excalidraw (browser extension) &middot; last updated 26 July
+        2026
+      </p>
+
+      <p class="lede">
+        This extension collects nothing, sends nothing, and stores nothing about you. It
+        runs entirely inside your browser.
+      </p>
+
+      <h2>What data is collected</h2>
+      <p>
+        None. There is no account, no sign-in, no server, no database, no analytics, no
+        telemetry, no crash reporting, no advertising and no third-party SDKs.
+      </p>
+
+      <h2>What the extension does with page content</h2>
+      <p>
+        When you explicitly activate the extension on a tab (by clicking its toolbar
+        button or pressing its keyboard shortcut), it captures an image of that tab's
+        visible area. That image is used in two ways:
+      </p>
+      <ul>
+        <li>
+          as a frozen backdrop, so you can draw on a page that does not move underneath
+          you;
+        </li>
+        <li>as the base of the PNG you get when you press &ldquo;Save screenshot&rdquo;.</li>
+      </ul>
+      <p>
+        Both happen locally in your browser. The image is passed to the browser's own
+        download manager (the <code>chrome.downloads</code> API), which writes the PNG to
+        your normal downloads folder. The extension never uploads, transmits, forwards or
+        copies that image anywhere else, and it keeps no copy after the overlay is closed.
+        Your drawings live only in the open overlay; closing it discards them.
+      </p>
+
+      <h2>Network activity</h2>
+      <p>
+        The extension makes no network requests. The Excalidraw editor, React and all
+        fonts are bundled inside the extension package, so no remote code or remote asset
+        is ever loaded.
+      </p>
+
+      <h2>Permissions</h2>
+      <ul>
+        <li>
+          <code>activeTab</code>: temporary access to the tab you activated the extension
+          on, so it can capture that tab and show the drawing overlay there. No other tab
+          is touched.
+        </li>
+        <li>
+          <code>scripting</code>: injects the bundled overlay script into that one tab, on
+          demand.
+        </li>
+        <li><code>downloads</code>: saves the finished PNG to your downloads folder.</li>
+      </ul>
+      <p>
+        No host permissions are requested, so the extension has no standing access to any
+        website.
+      </p>
+
+      <h2>Data sharing and selling</h2>
+      <p>
+        There is no data, therefore nothing is shared, sold or transferred to anyone, and
+        nothing is used for creditworthiness or lending purposes.
+      </p>
+
+      <h2>Children</h2>
+      <p>The extension is safe for all ages because it collects no data from anyone.</p>
+
+      <h2>Changes</h2>
+      <p>
+        If this policy ever changes, the updated version will be published at the same URL
+        with a new &ldquo;last updated&rdquo; date.
+      </p>
+
+      <h2>Contact</h2>
+      <p>
+        Questions or reports:
+        <a href="https://github.com/isaaclins/arc-excalidraw-plugin/issues"
+          >github.com/isaaclins/arc-excalidraw-plugin/issues</a
+        >
+      </p>
+
+      <footer>
+        Source code (MIT):
+        <a href="https://github.com/isaaclins/arc-excalidraw-plugin"
+          >github.com/isaaclins/arc-excalidraw-plugin</a
+        >
+      </footer>
+    </main>
+  </body>
+</html>
