@@ -1,0 +1,198 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Draw on Page with Excalidraw</title>
+<meta name="description" content="Draw over any web page with the full Excalidraw editor, then save the page and your annotations as a clean PNG. Fully local, no accounts, no tracking.">
+<link rel="icon" href="assets/icon-128.png">
+<style>
+  :root {
+    --bg: #121212;
+    --panel: #1b1b1f;
+    --ink: #ececf1;
+    --muted: #9a9aa5;
+    --accent: #6965db;
+    --accent-2: #e03131;
+    --border: #2b2b31;
+    --radius: 14px;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html { scroll-behavior: smooth; }
+  body {
+    background: var(--bg);
+    color: var(--ink);
+    font: 17px/1.65 -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+    -webkit-font-smoothing: antialiased;
+  }
+  .wrap { max-width: 980px; margin: 0 auto; padding: 0 24px; }
+
+  /* Hero */
+  header { padding: 88px 0 48px; text-align: center; position: relative; overflow: hidden; }
+  header::before {
+    content: "";
+    position: absolute; inset: 0;
+    background:
+      radial-gradient(600px 300px at 30% 0%, rgba(105,101,219,.18), transparent 70%),
+      radial-gradient(500px 260px at 75% 10%, rgba(224,49,49,.10), transparent 70%);
+    pointer-events: none;
+  }
+  .icon { width: 88px; height: 88px; border-radius: 22px; box-shadow: 0 8px 40px rgba(105,101,219,.35); }
+  h1 { font-size: clamp(2rem, 5vw, 3.1rem); letter-spacing: -.02em; margin: 22px 0 10px; }
+  h1 em { font-style: normal; color: var(--accent); }
+  .tagline { color: var(--muted); font-size: 1.15rem; max-width: 34em; margin: 0 auto; }
+  .cta { display: flex; gap: 14px; justify-content: center; margin-top: 30px; flex-wrap: wrap; }
+  .btn {
+    display: inline-flex; align-items: center; gap: 8px;
+    padding: 12px 22px; border-radius: 12px; text-decoration: none;
+    font-weight: 600; font-size: 1rem; transition: transform .12s ease, box-shadow .12s ease;
+  }
+  .btn:hover { transform: translateY(-1px); }
+  .btn-primary { background: var(--accent); color: #fff; box-shadow: 0 4px 24px rgba(105,101,219,.4); }
+  .btn-ghost { border: 1px solid var(--border); color: var(--ink); background: var(--panel); }
+  .kbd-hint { margin-top: 18px; color: var(--muted); font-size: .95rem; }
+  kbd {
+    background: var(--panel); border: 1px solid var(--border); border-bottom-width: 2px;
+    border-radius: 6px; padding: 2px 7px; font: 600 .85em ui-monospace, SFMono-Regular, Menlo, monospace;
+    color: var(--ink);
+  }
+
+  .shot {
+    display: block; width: 100%; border-radius: var(--radius);
+    border: 1px solid var(--border); box-shadow: 0 20px 60px rgba(0,0,0,.5);
+  }
+  .hero-shot { margin: 48px auto 0; max-width: 980px; }
+
+  /* Sections */
+  section { padding: 72px 0 0; }
+  h2 { font-size: 1.7rem; letter-spacing: -.01em; margin-bottom: 8px; }
+  .sub { color: var(--muted); margin-bottom: 32px; }
+
+  .steps { display: grid; grid-template-columns: repeat(3, 1fr); gap: 18px; }
+  .step {
+    background: var(--panel); border: 1px solid var(--border); border-radius: var(--radius);
+    padding: 24px 20px;
+  }
+  .step .num {
+    display: inline-flex; width: 34px; height: 34px; align-items: center; justify-content: center;
+    background: rgba(105,101,219,.15); color: var(--accent); border-radius: 10px;
+    font-weight: 700; margin-bottom: 14px;
+  }
+  .step h3 { font-size: 1.05rem; margin-bottom: 6px; }
+  .step p { color: var(--muted); font-size: .95rem; }
+
+  .features { display: grid; grid-template-columns: repeat(2, 1fr); gap: 14px; }
+  .feature {
+    display: flex; gap: 12px; align-items: flex-start;
+    background: var(--panel); border: 1px solid var(--border); border-radius: var(--radius);
+    padding: 18px;
+  }
+  .feature .dot { color: var(--accent-2); font-size: 1.2rem; line-height: 1.4; }
+  .feature p { color: var(--muted); font-size: .95rem; }
+  .feature strong { color: var(--ink); display: block; margin-bottom: 2px; }
+
+  .privacy {
+    background: linear-gradient(180deg, rgba(105,101,219,.08), transparent);
+    border: 1px solid var(--border); border-radius: var(--radius); padding: 30px;
+  }
+  .privacy p { color: var(--muted); }
+  .privacy strong { color: var(--ink); }
+
+  footer {
+    margin-top: 88px; padding: 34px 0 44px; border-top: 1px solid var(--border);
+    color: var(--muted); font-size: .92rem; text-align: center;
+  }
+  footer a { color: var(--ink); text-decoration: none; border-bottom: 1px solid var(--border); }
+  footer a:hover { border-color: var(--ink); }
+  .footer-links { display: flex; gap: 22px; justify-content: center; margin-bottom: 12px; flex-wrap: wrap; }
+
+  @media (max-width: 760px) {
+    .steps { grid-template-columns: 1fr; }
+    .features { grid-template-columns: 1fr; }
+    header { padding-top: 64px; }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    html { scroll-behavior: auto; }
+    .btn { transition: none; }
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="wrap">
+    <img class="icon" src="assets/icon-128.png" alt="Draw on Page with Excalidraw icon" width="88" height="88">
+    <h1>Draw on <em>any page</em>.<br>Save a clean screenshot.</h1>
+    <p class="tagline">The full Excalidraw editor, overlaid on the tab you are looking at. Sketch, circle, point, annotate, then download everything as one PNG.</p>
+    <div class="cta">
+      <a class="btn btn-primary" href="https://chromewebstore.google.com/detail/fhnbgefimkjkigkobpekbjglomdjlhhi">Add to Chrome / Arc</a>
+      <a class="btn btn-ghost" href="https://github.com/isaaclins/arc-excalidraw-plugin">View source on GitHub</a>
+    </div>
+    <p class="kbd-hint">or press <kbd>&#8984;</kbd> <kbd>&#8679;</kbd> <kbd>X</kbd> once installed (<kbd>Ctrl</kbd> <kbd>Shift</kbd> <kbd>X</kbd> on Windows / Linux)</p>
+    <img class="shot hero-shot" src="assets/hero-google.png" alt="Red hand-drawn circle and arrows over the Google homepage, drawn with the extension" loading="eager">
+  </div>
+</header>
+
+<main class="wrap">
+
+  <section>
+    <h2>How it works</h2>
+    <p class="sub">Three steps, nothing to configure.</p>
+    <div class="steps">
+      <div class="step">
+        <span class="num">1</span>
+        <h3>Activate</h3>
+        <p>Click the toolbar button or hit the keyboard shortcut. The page freezes underneath so videos and animations hold still while you draw.</p>
+      </div>
+      <div class="step">
+        <span class="num">2</span>
+        <h3>Draw</h3>
+        <p>The freehand pen starts pre-selected in red. Switch to rectangles, arrows, text, or any other Excalidraw tool whenever you like.</p>
+      </div>
+      <div class="step">
+        <span class="num">3</span>
+        <h3>Save</h3>
+        <p>Hit "Save screenshot". The extension hides its own controls, captures the visible tab, and drops a PNG into your downloads folder.</p>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <h2>See it in action</h2>
+    <p class="sub">Circling Leonardo on Wikipedia, because of course.</p>
+    <img class="shot" src="assets/example-wikipedia.png" alt="Wikipedia article about Leonardo da Vinci with a red circle drawn around his portrait and an arrow pointing to it" loading="lazy">
+  </section>
+
+  <section>
+    <h2>What you get</h2>
+    <p class="sub">The real Excalidraw editor, not an imitation.</p>
+    <div class="features">
+      <div class="feature"><span class="dot">&#10022;</span><p><strong>Every Excalidraw tool</strong>Rectangle, diamond, ellipse, arrow, line, freehand, text, eraser, laser pointer, and image paste.</p></div>
+      <div class="feature"><span class="dot">&#10022;</span><p><strong>Frozen backdrop</strong>The page is captured at activation time, so nothing moves under your drawing.</p></div>
+      <div class="feature"><span class="dot">&#10022;</span><p><strong>One-click export</strong>Page plus annotations, saved as a single PNG in your normal downloads folder.</p></div>
+      <div class="feature"><span class="dot">&#10022;</span><p><strong>Keyboard-first</strong>Toggle with one shortcut, close with Escape, and the page underneath is untouched.</p></div>
+      <div class="feature"><span class="dot">&#10022;</span><p><strong>Made for feedback</strong>Bug reports, design reviews, docs, tickets, teaching, demos: point at the actual thing.</p></div>
+      <div class="feature"><span class="dot">&#10022;</span><p><strong>Open source</strong>MIT licensed, built on the official @excalidraw/excalidraw package. Read every line.</p></div>
+    </div>
+  </section>
+
+  <section>
+    <div class="privacy">
+      <h2>Nothing leaves your device</h2>
+      <p><strong>No account. No server. No analytics. No tracking.</strong> The screenshot is generated inside your browser and handed straight to the browser's own download manager. The extension only runs on a tab when you explicitly activate it there, and requests no access to any website on its own.</p>
+    </div>
+  </section>
+
+</main>
+
+<footer>
+  <div class="footer-links">
+    <a href="https://github.com/isaaclins/arc-excalidraw-plugin">GitHub</a>
+    <a href="https://github.com/isaaclins/arc-excalidraw-plugin/issues">Report an issue</a>
+    <a href="privacy/">Privacy policy</a>
+  </div>
+  <p>Built by <a href="https://isaaclins.com">Isaac Lins</a>. Not affiliated with, endorsed by, or sponsored by the Excalidraw project.</p>
+</footer>
+
+</body>
+</html>
