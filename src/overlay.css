@@ -1,0 +1,169 @@
+* {
+  box-sizing: border-box;
+}
+
+html,
+body,
+#root {
+  width: 100%;
+  height: 100%;
+  margin: 0;
+  overflow: hidden;
+  background: transparent;
+}
+
+button {
+  font: inherit;
+}
+
+.arc-draw {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  color: #1b1b1f;
+  font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+}
+
+.arc-draw__page,
+.arc-draw__editor {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+}
+
+.arc-draw__page {
+  object-fit: fill;
+  pointer-events: none;
+  user-select: none;
+}
+
+.arc-draw__editor .excalidraw {
+  background: transparent !important;
+}
+
+.arc-draw__loading {
+  position: absolute;
+  inset: 0;
+  display: grid;
+  place-items: center;
+  background: rgb(255 255 255 / 72%);
+  color: #5b57d1;
+  font: 600 14px/1.4 ui-sans-serif, system-ui, sans-serif;
+}
+
+.arc-draw__controls {
+  position: absolute;
+  z-index: 2147483647;
+  top: 14px;
+  right: 14px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  min-height: 44px;
+  padding: 6px;
+  border: 1px solid rgb(30 30 30 / 9%);
+  border-radius: 12px;
+  background: rgb(255 255 255 / 94%);
+  box-shadow: 0 8px 28px rgb(0 0 0 / 16%);
+  backdrop-filter: blur(12px);
+}
+
+.arc-draw__hint {
+  padding: 0 7px;
+  color: #6c6c78;
+  font-size: 12px;
+  font-weight: 600;
+  white-space: nowrap;
+}
+
+.arc-draw__button {
+  height: 34px;
+  border: 0;
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 13px;
+  font-weight: 700;
+  transition: background-color 120ms ease, transform 120ms ease;
+}
+
+.arc-draw__button:active:not(:disabled) {
+  transform: translateY(1px);
+}
+
+.arc-draw__button:focus-visible {
+  outline: 2px solid #6965db;
+  outline-offset: 2px;
+}
+
+.arc-draw__button:disabled {
+  cursor: wait;
+  opacity: 0.55;
+}
+
+.arc-draw__button--primary {
+  padding: 0 13px;
+  background: #6965db;
+  color: white;
+}
+
+.arc-draw__button--primary:hover:not(:disabled) {
+  background: #5753d0;
+}
+
+.arc-draw__button--close {
+  width: 34px;
+  padding: 0 0 2px;
+  background: #f1f0ff;
+  color: #4a47b1;
+  font-size: 23px;
+  font-weight: 400;
+}
+
+.arc-draw__button--close:hover {
+  background: #e3e2fe;
+}
+
+.arc-draw__error {
+  position: absolute;
+  z-index: 2147483647;
+  right: 14px;
+  bottom: 14px;
+  max-width: min(420px, calc(100vw - 28px));
+  padding: 10px 13px;
+  border-radius: 9px;
+  background: #c92a2a;
+  color: white;
+  box-shadow: 0 6px 24px rgb(0 0 0 / 18%);
+  font-size: 13px;
+  font-weight: 600;
+}
+
+.arc-draw--capturing .arc-draw__controls,
+.arc-draw--capturing .arc-draw__error,
+.arc-draw--capturing .layer-ui__wrapper,
+.arc-draw--capturing .FixedSideContainer,
+.arc-draw--capturing .App-bottom-bar,
+.arc-draw--capturing .App-toolbar,
+.arc-draw--capturing .Toast {
+  display: none !important;
+}
+
+@media (max-width: 640px) {
+  .arc-draw__controls {
+    top: auto;
+    right: 8px;
+    bottom: 8px;
+  }
+
+  .arc-draw__hint {
+    display: none;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .arc-draw__button {
+    transition: none;
+  }
+}
