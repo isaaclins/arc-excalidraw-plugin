@@ -122,7 +122,7 @@ function DrawingOverlay() {
               saveToActiveFile: false,
               toggleTheme: false,
             },
-            tools: { image: false },
+            tools: { image: true },
           }}
         />
       </div>
